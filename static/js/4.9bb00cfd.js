@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[4],{"./.docz/app/imports.js":function(n,r,o){"use strict";o.r(r),o.d(r,"imports",function(){return e});var e={"src/browerChangeColor/index.mdx":function(){return o.e(2).then(o.bind(null,"./src/browerChangeColor/index.mdx"))}}}},0,[2]]);
