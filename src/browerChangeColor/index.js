@@ -32,7 +32,7 @@ export default class ColorPicker extends React.Component {
                         </li>
                     ))}
                 </ul>
-                <div className="test-block"></div>
+                <div className="test-block">sdfsdsdfsdsdf</div>
             </div>
         );
     }

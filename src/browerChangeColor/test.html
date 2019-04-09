@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet/less" type="text/css" href="styles.less" /> 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.2/less.min.js"></script>
+    <title>test-change-theme</title>
+</head>
+<body>
+    <h2>参考地址</h2>
+    <a href="https://blog.souche.com/untitled-17/"> https://blog.souche.com/untitled-17/ </a>
+    <div id="root">
+        <ul className="color-picker">
+            <li data-color='green'>green</li>
+            <li data-color='red'>red</li>
+            <li data-color='blue'>blue</li>
+        </ul>
+        <div class="test-block"></div>
+    </div>
+
+
+    <script>
+        document.querySelector('ul').addEventListener('click', function(e) {
+            console.log(e, e.target.getAttribute('data-color'), e.currentTarget.tagName)
+            if(e.target.tagName === "LI") {
+                var color = e.target.getAttribute('data-color')
+                window.less
+                .modifyVars({  // 调用 `less.modifyVars` 方法来改变变量值
+                    '@primary-color': color,
+                    '@bg-color': color,
+                })
+                .then(() => {
+                    console.log('修改成功');
+                });
+            }
+        })
+    </script>
+</body>
+</html>
