@@ -1,0 +1,15 @@
+{
+  "name": "daily-learning",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "xueyang996 <xueyang996@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "docDev": "umi-lib doc dev",
+    "doc:build": "umi-lib doc build",
+    "doc:deploy": "umi-lib doc build && umi-lib doc deploy"
+  },
+  "dependencies": {
+    "umi-library": "^1.3.0"
+  }
+}
