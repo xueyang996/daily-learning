@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Emojs-url</title>
+</head>
+<body>
+  <video id="video" src="./self-portrait.mp4" controls muted></video>
+  <script>
+    var video;
+    var e = ['🌑', '🌘', '🌗', '🌖', '🌕'],
+        video;
+
+    function formatTime(seconds) {
+        var minutes = Math.floor(seconds/60),
+            seconds = Math.floor(seconds - (minutes*60));
+
+        return ('0'+minutes).substr(-2) + ':' + ('0'+seconds).substr(-2);
+    }
+
+    function renderProgressBar() {
+        var s = '',
+            c = 0,
+            l = 10,
+            p = Math.floor(video.currentTime / video.duration * ((l*5)-1)),
+            i;
+        console.log(p, video.currentTime, video.duration, l)
+        while (p >= 5) {
+            s += e[4];
+            c ++;
+            p -= 5;
+        }
+        s += e[p];
+        c ++;
+        while (c < l) {
+            s += e[0];
+            c ++;
+        }
+
+        location.hash = s+formatTime(video.currentTime)+'╱'+formatTime(video.duration);
+    }
+
+// function formatTime(seconds) {
+//     var minutes = Math.floor(seconds/60),
+//         seconds = Math.floor(seconds - (minutes*60));
+
+//     return ('0'+minutes).substr(-2) + ':' + ('0'+seconds).substr(-2);
+// }
+
+// function renderProgressBar() {
+//     var s = '',
+//         l = 15,
+//         p = Math.floor(video.currentTime / video.duration * (l-1)),
+//         i;
+
+//     for (i = 0; i < l; i ++) {
+//         if (i == p) s +='◯';
+//         else if (i < p) s += '─';
+//         else s += '┄';
+//     }
+
+//     location.hash = '╭'+s+'╮'+formatTime(video.currentTime)+'╱'+formatTime(video.duration);
+// }
+
+video = document.getElementById('video');
+video.addEventListener('timeupdate', renderProgressBar);
+  </script>
+</body>
+</html>
