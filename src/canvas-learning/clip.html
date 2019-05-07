@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>CLIP</title>
+</head>
+<body>
+    <div id="canvas-warp">
+        <canvas id="canvas">
+            你的浏览器居然不支持Canvas？！赶快换一个吧！！
+        </canvas>
+        <br>
+        <canvas id="canvas1">
+            你的浏览器居然不支持Canvas？！赶快换一个吧！！
+        </canvas>
+    </div>
+    
+    <script>
+        window.onload = function(){
+            var canvas = document.getElementById("canvas");
+            canvas.width = 800;
+            canvas.height = 600;
+            var context = canvas.getContext("2d");
+            context.fillStyle = "#FFF";
+            context.fillRect(0,0,800,600);
+
+            context.beginPath();
+            context.moveTo(400,260);
+            context.bezierCurveTo(450,220,450,300,400,315);
+            context.bezierCurveTo(350,300,350,220,400,260);
+            context.clip();
+            context.closePath();
+    
+            var img = new Image();
+            img.src = "./1.jpg";
+            img.onload = function(){
+              context.drawImage(img,348,240,100,100);
+            }
+
+
+            var canvas1 = document.getElementById("canvas1");
+            canvas1.width = 800;
+            canvas1.height = 600;
+            var context = canvas1.getContext("2d");
+            context.fillStyle = "#FFF";
+            context.fillRect(0,0,800,600);
+
+            context.beginPath();
+            context.rect(200,100,400,400);
+            drawPathRect(context, 250, 150, 300, 150);
+            drawPathTriangle(context, 345, 350, 420, 450, 270, 450);
+            context.arc(500, 400, 50, 0, Math.PI * 2, true);
+            context.closePath();
+
+            context.fillStyle = "#058";
+            context.shadowColor = "gray";
+            context.shadowOffsetX = 10;
+            context.shadowOffsetY = 10;
+            context.shadowBlur = 10;
+            context.fill();
+
+        };
+
+        //逆时针绘制矩形
+        function drawPathRect(cxt, x, y, w, h){
+            /**
+              * 这里不能使用beginPath和closePath，
+              * 不然就不属于子路径而是另一个全新的路径，
+              * 无法使用非零环绕原则
+              */
+            cxt.moveTo(x, y);
+            cxt.lineTo(x, y + h);
+            cxt.lineTo(x + w, y + h);
+            cxt.lineTo(x + w, y);
+            cxt.lineTo(x, y);
+
+        }
+
+        //逆时针绘制三角形
+        function drawPathTriangle(cxt, x1, y1, x2, y2, x3, y3){
+            cxt.moveTo(x1,y1);
+            cxt.lineTo(x3,y3);
+            cxt.lineTo(x2,y2);
+            cxt.lineTo(x1,y1);
+        }
+    </script>
+</body>
+</html>
