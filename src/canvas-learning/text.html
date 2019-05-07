@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>canvas-text</title>
+</head>
+<body>
+  <canvas id='canvas'></canvas>
+
+  <script>
+    window.onload = function() {
+      let canvas = document.getElementById("canvas")
+      canvas.width = 800
+      canvas.height = 600
+      var context = canvas.getContext('2d')
+      context.fillStyle = '#fff'
+      context.fillRect(0,0, 800,600)
+
+      context.beginPath()
+      context.font = '50px Verdana'
+      var gradient = context.createLinearGradient(0, 0 , 400, 0)
+      gradient.addColorStop('0', 'magenta')
+      gradient.addColorStop('0.5', 'blue')
+      gradient.addColorStop('1', 'red')
+      context.fillStyle = gradient
+      context.strokeStyle = '#0AA'
+
+      context.strokeText('xueyang996.github.io', 50, 100)
+      context.fillText('xueyang996.github.io', 50, 200)
+      //限制宽度
+      context.fillText("airingursb.github.io", 50, 300, 200);
+    }
+  </script>
+  
+</body>
+</html>

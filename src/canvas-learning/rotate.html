@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>rotate-tranlsate-scale-canvas</title>
+  <style>
+    body {
+      background: #eee;
+      margin: 0 auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas">
+      你的浏览器居然不支持Canvas？！赶快换一个吧！！
+  </canvas>
+  <br />
+  <canvas id="canvas2">
+      你的浏览器居然不支持Canvas？！赶快换一个吧！！
+  </canvas>
+  <br />
+  <canvas id="canvas3">
+      你的浏览器居然不支持Canvas？！赶快换一个吧！！
+  </canvas>
+  <script>
+    window.onload =function() {
+      let canvas = document.getElementById('canvas')
+      canvas.width = 800
+      canvas.height = 600
+      let context = canvas.getContext('2d')
+      context.fillStyle = '#fff'
+      context.fillRect(0,0, 800, 600)
+
+      for(let i = 0; i <= 12; i++) {
+        context.save();
+        context.translate(70 + i * 50, 50 + i *40)
+        context.fillStyle = 'blue'
+        context.fillRect(0,0, 20,20)
+        context.restore()
+
+        context.save()
+        context.translate(70 + i * 50, 50 + i *40)
+        context.rotate(i*30*Math.PI/180)
+        context.fillStyle='red'
+        context.fillRect(0,0,20,20)
+        context.restore()
+      }
+
+      // another canvas
+      var canvas2 = document.getElementById('canvas2')
+      canvas2.width = 800
+      canvas2.height = 600
+      var context2 = canvas2.getContext('2d')
+      context2.fillStyle = '#fff'
+      context2.fillRect(0, 0, 800, 600)
+
+      for(let i = 1; i< 11; i++) {
+        context2.save()
+        context2.translate(400, 300)
+        context2.rotate(36*i * Math.PI / 180)
+        context2.fillStyle = 'rgba(255, 0,0, 0.2)'
+        context2.fillRect(0, -200, 200, 200)
+        context2.restore()
+      }
+
+      // third canvas
+      var canvas3 = document.getElementById('canvas3')
+      canvas3.width = 800
+      canvas3.height = 600
+      var context3 = canvas3.getContext('2d')
+      context3.fillStyle = '#fff'
+      context3.fillRect(0,0,800,600)
+      
+      context3.strokeStyle = 'red'
+      context3.lineWidth = 5
+      for(let i = 1; i< 4; i++) {
+        context3.save()
+        context3.scale(i,i)
+        context3.strokeRect(50,50,150,100)
+        context3.restore()
+      }
+
+
+    }
+  </script>
+</body>
+</html>

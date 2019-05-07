@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>transform</title>
+  <style>
+    body {
+      margin: 0 auto;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas"></canvas>
+
+  <script>
+    window.onload=function() {
+    var canvas = document.getElementById('canvas')
+    canvas.width = 800
+    canvas.height = 600
+    var context = canvas.getContext('2d')
+    context.fillStyle = '#fff'
+    context.fillRect(0,0,800,600)
+
+    context.fillStyle = 'yellow'
+    context.strokeStyle = 'blue'
+    context.lineWidth = 5
+
+    context.save()
+    context.transform(1, 0,0,1, 300, 200)
+    context.transform(2,0,0,1.5, 0,0)
+
+    context.transform(1, -0.1,0.1,1,0,0)
+    context.fillRect(0, 0, 200, 200)
+    context.strokeRect(0,0,200,200)
+    context.restore()
+    }
+  
+  </script>
+</body>
+</html>
