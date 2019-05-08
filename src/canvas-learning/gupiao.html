@@ -18,11 +18,15 @@
   </canvas>
 
   <script>
+    let i = 0
+    let context
+    let lastx, lasty;
     window.onload = function() {
+      
       var canvas = document.getElementById('canvas')
       canvas.width = '800'
       canvas.height = '600'
-      var context = canvas.getContext('2d')
+      context = canvas.getContext('2d')
       context.fillStyle='#fff'
       context.fillRect(0,0,800, 600)
 
@@ -33,24 +37,52 @@
       context.lineTo(800, 300)
       context.stroke()
       context.moveTo(0, 300)
-
+      
       context.beginPath()
-      context.strokeStyle='blue'
-      let i = 0
-      setInterval(function(){
-        i ++;
-        let x = i*8
-        let random = Math.random()
-        let y = 300 +( random > 0.5  ? (-200 *random) : (200 *random))
-        
-        console.log('?????', i, x, y)
-        drawLine(context, x,y)
-      }, 1000)
-
+      // context.globalAlpha = 0.3
+      context.strokeStyle='#90B7DE'
+      context.fillStyle="#F2FBFE"
+      // context.fillStyle="red"
+      initWebSocket();
     }
     function drawLine (ctx, x, y) {
       ctx.lineTo(x,y)
+      ctx.save()
       ctx.stroke()
+      
+      ctx.lineTo(x, 600)
+      if(lastx || lasty){
+        ctx.lineTo(lastx, 600)
+        ctx.lineTo(lastx, lasty)
+      }
+      ctx.moveTo(x,y)
+      ctx.fill()
+      ctx.restore()
+      lastx = x
+      lasty = y
+    }
+
+    function initWebSocket () {
+      if ("WebSocket" in window) {
+        // let ws = new WebSocket('ws://www.xueyangshipin.cn:9008')
+        let ws = new WebSocket('ws://localhost:9008')
+        ws.onopen = function() {
+          console.log('已连接')
+          ws.send('发送数据')
+        }
+
+        ws.onmessage = function (evt) {
+          console.log(evt)
+          let x = i* 2       
+          i++
+          // console.log('?????', i, x, y)
+          drawLine(context, x, evt.data)
+        }
+
+        ws.onclose = function() {
+          console.log('关闭')
+        }
+      }
     }
   </script>
 </body>
