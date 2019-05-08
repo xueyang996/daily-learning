@@ -10,25 +10,45 @@
       background: #ccc;
       text-align: center;
     }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .canvas-parent {
+      position: relative;
+      
+    }
   </style>
 </head>
 <body>
-  <canvas id="canvas">
+  <div class="canvas-parent">
 
-  </canvas>
-
+    <canvas id="canvas" >
+  
+    </canvas>
+    <canvas id="canvas2">
+  
+      </canvas>
+      <canvas id="canvas3">
+  
+      </canvas>
+  </div>
   <script>
     let i = 0
     let context
     let lastx, lasty;
     window.onload = function() {
-      
+      initCanvas2()
       var canvas = document.getElementById('canvas')
+      
+      var canvas3 = document.getElementById('canvas3')
       canvas.width = '800'
-      canvas.height = '600'
+      canvas.height = '900'
       context = canvas.getContext('2d')
       context.fillStyle='#fff'
-      context.fillRect(0,0,800, 600)
+      context.fillRect(0,0,800, 900)
 
       context.strokeStyle='red'
       // context.lineWidth = 5
@@ -41,13 +61,16 @@
       context.beginPath()
       // context.globalAlpha = 0.3
       context.strokeStyle='#90B7DE'
+      context.strokeStyle='#90B7DE'
       context.fillStyle="#F2FBFE"
+      context.fillStyle="green"
       // context.fillStyle="red"
       initWebSocket();
     }
     function drawLine (ctx, x, y) {
+      
+      ctx.strokeStyle='#90B7DE'
       ctx.lineTo(x,y)
-      ctx.save()
       ctx.stroke()
       
       ctx.lineTo(x, 600)
@@ -57,9 +80,17 @@
       }
       ctx.moveTo(x,y)
       ctx.fill()
-      ctx.restore()
       lastx = x
       lasty = y
+      ctx.save()
+
+      ctx.strokeStyle='red'
+      ctx.beginPath()
+      ctx.moveTo(x, y-250 + 600)
+      ctx.lineTo(x, 900)
+      ctx.stroke()
+      ctx.restore()
+      ctx.moveTo(x, y)
     }
 
     function initWebSocket () {
@@ -73,7 +104,7 @@
 
         ws.onmessage = function (evt) {
           console.log(evt)
-          let x = i* 2       
+          let x = i* 20       
           i++
           // console.log('?????', i, x, y)
           drawLine(context, x, evt.data)
@@ -83,6 +114,29 @@
           console.log('关闭')
         }
       }
+    }
+  
+    function initCanvas2 (){
+      var canvas2 = document.getElementById('canvas2')
+      canvas2.width = '800'
+      canvas2.height = '900'
+      var context = canvas2.getContext('2d')
+      context.globalAlpha = 0.1
+      context.fillStyle='#fff'
+      context.fillRect(0,0,800, 900)
+      context.strokeStyle ='black'
+      context.lineWidth = 1
+
+      context.beginPath()
+      context.moveTo(0, 300)
+      context.lineTo(800, 300)
+      context.moveTo(0, 600)
+      context.lineTo(800, 600)
+      context.moveTo(266, 0)
+      context.lineTo(266, 900)
+      context.moveTo(532, 0)
+      context.lineTo(532, 900)
+      context.stroke()
     }
   </script>
 </body>
