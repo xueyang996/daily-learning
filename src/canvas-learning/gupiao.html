@@ -61,35 +61,35 @@
       context.beginPath()
       // context.globalAlpha = 0.3
       context.strokeStyle='#90B7DE'
-      context.strokeStyle='#90B7DE'
       context.fillStyle="#F2FBFE"
-      context.fillStyle="green"
       // context.fillStyle="red"
       initWebSocket();
     }
     function drawLine (ctx, x, y) {
-      
-      ctx.strokeStyle='#90B7DE'
+      ctx.beginPath()
       ctx.lineTo(x,y)
-      ctx.stroke()
-      
       ctx.lineTo(x, 600)
       if(lastx || lasty){
         ctx.lineTo(lastx, 600)
-        ctx.lineTo(lastx, lasty)
+        ctx.lineTo(lastx, lasty )
       }
-      ctx.moveTo(x,y)
       ctx.fill()
+
+      ctx.beginPath()
+      ctx.moveTo(lastx, lasty)    
+      ctx.strokeStyle='#90B7DE'
+      ctx.lineTo(x,y)
+      ctx.stroke()
+
+      // ctx.globalCompositeOperation='source-out'
       lastx = x
       lasty = y
-      ctx.save()
 
-      ctx.strokeStyle='red'
       ctx.beginPath()
+      ctx.strokeStyle='red'
       ctx.moveTo(x, y-250 + 600)
       ctx.lineTo(x, 900)
       ctx.stroke()
-      ctx.restore()
       ctx.moveTo(x, y)
     }
 

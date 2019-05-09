@@ -3,7 +3,9 @@ var data = require('./data')
 
 var server = ws.createServer(function (conn) {
   setInterval(function() {
-    conn.sendText(data.getData() + '')
+    conn.readyState && conn.sendText(data.getData() + '')
+    server.connections.forEach(function (conn) {
+    })
   }, 1000)
   conn.on('text', function(str) {
     console.log('??????@@@@@@@@@@@@', str)
