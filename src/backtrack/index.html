@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>回溯法</title>
+</head>
+<body>
+  <script>
+  function backtrack(list, templist, nums, start) {
+    list.push([...templist])
+    
+    for(let i =start, len = nums.length; i< len; i++) {
+      templist.push(nums[i])
+      backtrack(list, templist, nums, i+1)
+      templist.pop()
+    }
+  }
+
+
+  function sbuset(nums)   {
+    let list = []
+    backtrack(list, [], nums, 0)
+    return list
+  }
+
+
+  console.log(sbuset([1,2,3]))
+    
+  </script>
+</body>
+</html>
