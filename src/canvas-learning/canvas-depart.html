@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Canvas-depart</title>
+</head>
+<body>
+  <canvas id="canvas">浏览器不支持canvas？ 换google试试吧</canvas>
+
+  <script>
+    var data = []
+    let totalLen = 0
+    const width = 800;
+    const height = 600;
+    var len = parseInt(Math.random() * 10) + 5
+    for (let i = 0; i < len; i++) {
+      let eachArray = []
+      let lenEach = parseInt(Math.random() * 10) + 4
+      for (let j = 0; j < lenEach; j++) {
+        totalLen ++;
+        let value = parseInt(Math.random() * 100)
+        eachArray.push({name: 'name'+i+j, value})
+      }
+      data.push(eachArray)
+    }
+    console.log(data, totalLen)
+    let canvas = document.getElementById('canvas')
+    canvas.width = width
+    canvas.height = height
+    let context = canvas.getContext('2d')
+
+    context.fillStyle = '#EAF5FF'
+    context.fillRect(0,0, width, height)
+
+    calculatePart( {data, width, height, totalLen} )
+
+    function calculatePart({data, width, height, totalLen}) {
+      let eachWH = Math.floor(Math.sqrt(width*height / totalLen))
+      let numWidth = Math.ceil(width/eachWH)
+      let numHeight = Math.ceil(height/eachWH)
+      console.log(eachWH, numWidth, numHeight)
+
+      let eachPartXY = []
+
+      data.forEach(element => {
+        let eachLen = element.length;
+          
+      });
+
+    }
+
+    function drawRect({context, x, y, width, height, color}) {
+      context.save();
+      context.translate(x, y)
+      context.fillStyle = color
+      context.fillRect(0, 0, width, height)
+      context.restore()
+    }
+
+  
+  </script>
+</body>
+</html>
