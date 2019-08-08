@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .progress {
+      --pro: 60%;
+      --h: 60px;
+      --co: #0ff;
+      height: var(--h);
+      background: silver;
+      border-radius: var(--h);
+      background-image: radial-gradient(closest-side circle at var(--pro),var(--co), var(--co) 100%, transparent), linear-gradient(var(--co), var(--co));
+      background-size: 100%, var(--pro);
+      background-repeat: no-repeat;
+    }
+    .water-waves {
+      position: relative;
+      margin: 0 auto;
+      overflow: hidden;
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      text-align: center;
+      border: 1px solid gray;
+      line-height: 75px;
+      animation: water-waves linear infinite;
+    }
+    .water-waves1 {
+      position: absolute;
+      top: 40%;
+      left: -25%;
+      background: #33cfff;
+      width: 200%;
+      height: 200%;
+      border-radius: 33%;
+      animation: inherit;
+      animation-duration: 11s; 
+    }
+    .water-waves2 {
+      position: absolute;
+      top: 45%;
+      left: -35%;
+      background: #0aeffe;
+      width: 200%;
+      height: 200%;
+      border-radius: 33%;
+      animation: inherit;
+      animation-duration: 11s; 
+    }
+    .water-waves3 {
+      position: absolute;
+      top: 50%;
+      left: -35%;
+      background: #0f7ae4;
+      width: 200%;
+      height: 200%;
+      border-radius: 33%;
+      animation: inherit;
+      animation-duration: 11s; 
+    }
+    @keyframes water-waves {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress"></div>
+
+  <div class="water-waves">
+    <div class="water-waves1"></div>
+    <div class="water-waves2"></div>
+    <div class="water-waves3"></div>
+    水波特效
+  </div>
+</body>
+</html>
