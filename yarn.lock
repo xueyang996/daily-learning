@@ -2403,8 +2403,8 @@ code-point-at@^1.0.0:
   resolved "http://registry.npm.taobao.org/code-point-at/download/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
 
 codemirror@^5.42.2:
-  version "5.45.0"
-  resolved "http://registry.npm.taobao.org/codemirror/download/codemirror-5.45.0.tgz#db5ebbb3bf44028c684053f3954d011efcec27ad"
+  version "5.61.0"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.61.0.tgz#318e5b034a707207948b92ffc2862195e8fdb08e"
 
 codesandboxer-fs@^0.4.7:
   version "0.4.7"
@@ -9133,6 +9133,10 @@ typedarray@^0.0.6:
 typescript@3.3.4000:
   version "3.3.4000"
   resolved "http://registry.npm.taobao.org/typescript/download/typescript-3.3.4000.tgz#76b0f89cfdbf97827e1112d64f283f1151d6adf0"
+
+typescript@^3.5.3:
+  version "3.9.9"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.9.tgz#e69905c54bc0681d0518bd4d587cc6f2d0b1a674"
 
 ua-parser-js@^0.7.18:
   version "0.7.19"
