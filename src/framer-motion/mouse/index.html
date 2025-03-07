@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React with Framer Motion</title>
+    <!-- 引入 React 和 ReactDOM -->
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入 Framer Motion -->
+    <script src="https://unpkg.com/framer-motion@6/dist/framer-motion.js"></script>
+    <!-- 引入 Babel 用于编译 JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- 添加一些基本样式 -->
+    <style>
+      .circle {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: #ff0066;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // 引入 React 和 useState
+      const { useRef, useState, useEffect } = React;
+      // 引入 Framer Motion 的 Reorder 组件
+      const { motion } = Motion;
+
+      // App 组件
+      function App() {
+        const ref = useRef(null);
+        const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
+
+        useEffect(() => {
+          //  check if DOM element referenced by ref has been mounted
+          if (ref.current) {
+            const handlePointerMove = ({ clientX, clientY }) => {
+              const element = ref.current;
+              // calculate x and y coordinates
+              const x = clientX - element.offsetLeft - element.offsetWidth / 2;
+              const y = clientY - element.offsetTop - element.offsetHeight / 2;
+              // update state
+              setCoordinates({ x, y });
+            };
+
+            window.addEventListener("pointermove", handlePointerMove);
+            return () =>
+              window.removeEventListener("pointermove", handlePointerMove);
+          }
+        }, []);
+
+        return (
+          <motion.div
+            ref={ref}
+            className="circle"
+            animate={{ x: coordinates.x, y: coordinates.y }}
+            transition={{
+              type: "spring",
+            }}
+          />
+        );
+      }
+
+      // 渲染 React 组件到 DOM
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

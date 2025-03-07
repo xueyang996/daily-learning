@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React with Framer Motion</title>
+    <!-- 引入 React 和 ReactDOM -->
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入 Framer Motion -->
+    <script src="https://unpkg.com/framer-motion@6/dist/framer-motion.js"></script>
+    <!-- 引入 Babel 用于编译 JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- 添加一些基本样式 -->
+    <style>
+      * {
+        padding: 0;
+        margin: 0;
+      }
+
+      .app {
+        padding-bottom: 100px;
+        position: relative;
+      }
+
+      .background-image {
+        width: 100%;
+        height: 110vh;
+        object-fit: cover;
+        z-index: -1;
+      }
+
+      .text {
+        text-align: center;
+        color: white;
+        font-size: 22px;
+        font-family: Arial, Helvetica, sans-serif;
+        position: absolute;
+        width: 70%;
+        left: 50%;
+        top: 32%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // 引入 React 和 useState
+      const { useRef } = React;
+      // 引入 Framer Motion 的 Reorder 组件
+      const { motion, useScroll, useTransform } = Motion;
+
+      // App 组件
+      function App() {
+        const textRef = useRef();
+        // get current Y scroll progress with reference to the text
+        const { scrollYProgress } = useScroll({ target: textRef });
+        const y = useTransform(scrollYProgress, [0, 1], [-60, 60]);
+
+        return (
+          <div className="app">
+            <motion.div
+              className="text"
+              ref={textRef}
+              style={{ y: y, x: "-50%" }}
+            >
+              <h2>Hello, World!</h2>
+              <p>Framer motion parallax effects are super cool!</p>
+            </motion.div>
+            <img
+              src="https://cdn.pixabay.com/photo/2012/08/27/14/19/mountains-55067_640.png"
+              className="background-image"
+            />
+          </div>
+        );
+      }
+
+      // 渲染 React 组件到 DOM
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

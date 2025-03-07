@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React with Framer Motion</title>
+    <!-- 引入 React 和 ReactDOM -->
+    <script
+      src="https://unpkg.com/react@17/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <!-- 引入 Framer Motion -->
+    <script src="https://unpkg.com/framer-motion@6/dist/framer-motion.js"></script>
+    <!-- 引入 Babel 用于编译 JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- 添加一些基本样式 -->
+    <style>
+      ul {
+        list-style: none;
+        padding-left: 0;
+      }
+
+      li {
+        font-size: 20px;
+        padding: 10px 20px;
+        background: #94d8ff;
+        margin-bottom: 10px;
+        cursor: grab;
+        box-shadow: 1px 1px 5px #ffffff;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      // 引入 React 和 useState
+      const { useState } = React;
+      // 引入 Framer Motion 的 Reorder 组件
+      const { Reorder } = Motion;
+
+      // 初始列表
+      const list = ["React", "JavaScript", "Framer Motion", "CSS", "HTML"];
+
+      // App 组件
+      function App() {
+        const [listItems, setListItems] = useState(list);
+
+        return (
+          <Reorder.Group axis="y" onReorder={setListItems} values={listItems}>
+            {listItems.map((el) => (
+              <Reorder.Item key={el} value={el} className="reorder-item">
+                <span>{el}</span>
+              </Reorder.Item>
+            ))}
+          </Reorder.Group>
+        );
+      }
+
+      // 渲染 React 组件到 DOM
+      ReactDOM.render(<App />, document.getElementById("root"));
+    </script>
+  </body>
+</html>
